@@ -10,7 +10,8 @@ height = 14.0
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(0, -8)
 script = ExtResource("1_xtx3v")
-speed = null
+speed = 5.0
+jump_power = 8.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -15)
