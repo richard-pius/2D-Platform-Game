@@ -1,7 +1,99 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1x86wxq2bp7n"]
+[gd_scene load_steps=11 format=3 uid="uid://c1x86wxq2bp7n"]
 
 [ext_resource type="Texture2D" uid="uid://drhfd51ltgghh" path="res://Assets/Sprits/player.png" id="1_hu8d6"]
 [ext_resource type="Script" uid="uid://cir7t2872skht" path="res://Assets/Scripts/player_controller.gd" id="1_xtx3v"]
+[ext_resource type="Script" uid="uid://vuyqhweqry28" path="res://Assets/Scripts/player_animator.gd" id="2_dqmen"]
+
+[sub_resource type="Animation" id="Animation_xtx3v"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAnimator/Sprite2D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(0, 0, 16, 16), Rect2(16, 0, 16, 16), Rect2(32, 0, 16, 16), Rect2(48, 0, 16, 16), Rect2(64, 0, 16, 16), Rect2(80, 0, 16, 16), Rect2(96, 0, 16, 16), Rect2(96, 0, 16, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_dqmen"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAnimator/Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 16, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_wrc6h"]
+resource_name = "move"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAnimator/Sprite2D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(0, 16, 16, 16), Rect2(16, 16, 16, 16), Rect2(32, 16, 16, 16), Rect2(48, 16, 16, 16), Rect2(0, 16, 16, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_x1pv6"]
+resource_name = "jump"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAnimator/Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 32, 16, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_4xu03"]
+resource_name = "fall"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAnimator/Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 48, 16, 16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wrc6h"]
+_data = {
+&"RESET": SubResource("Animation_dqmen"),
+&"fall": SubResource("Animation_4xu03"),
+&"idle": SubResource("Animation_xtx3v"),
+&"jump": SubResource("Animation_x1pv6"),
+&"move": SubResource("Animation_wrc6h")
+}
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xtx3v"]
 radius = 4.0
@@ -17,12 +109,21 @@ jump_power = 8.0
 offset = Vector2(0, -15)
 zoom = Vector2(6, 6)
 
-[node name="AgentAnimator" type="Node2D" parent="."]
+[node name="PlayerAnimator" type="Node2D" parent="." node_paths=PackedStringArray("player_controller", "animation_player", "sprite")]
+script = ExtResource("2_dqmen")
+player_controller = NodePath("..")
+animation_player = NodePath("AnimationPlayer")
+sprite = NodePath("Sprite2D")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="AgentAnimator"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerAnimator"]
 root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_wrc6h")
+}
+autoplay = "idle"
+speed_scale = 1.5
 
-[node name="Sprite2D" type="Sprite2D" parent="AgentAnimator"]
+[node name="Sprite2D" type="Sprite2D" parent="PlayerAnimator"]
 texture = ExtResource("1_hu8d6")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
