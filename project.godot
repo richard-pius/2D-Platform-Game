@@ -15,6 +15,10 @@ run/main_scene="uid://dxgkm7pbece4y"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+BackgroundMusic="*res://Assets/Scences/Background_music.tscn"
+
 [dotnet]
 
 project/assembly_name="2d platformer game"
