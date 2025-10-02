@@ -4,6 +4,37 @@
 [ext_resource type="Script" uid="uid://cir7t2872skht" path="res://Assets/Scripts/player_controller.gd" id="1_xtx3v"]
 [ext_resource type="Script" uid="uid://vuyqhweqry28" path="res://Assets/Scripts/player_animator.gd" id="2_dqmen"]
 
+[sub_resource type="Animation" id="Animation_dqmen"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAnimator/Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 16, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_4xu03"]
+resource_name = "fall"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAnimator/Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 48, 16, 16)]
+}
+
 [sub_resource type="Animation" id="Animation_xtx3v"]
 resource_name = "idle"
 length = 2.0
@@ -22,8 +53,9 @@ tracks/0/keys = {
 "values": [Rect2(0, 0, 16, 16), Rect2(16, 0, 16, 16), Rect2(32, 0, 16, 16), Rect2(48, 0, 16, 16), Rect2(64, 0, 16, 16), Rect2(80, 0, 16, 16), Rect2(96, 0, 16, 16), Rect2(96, 0, 16, 16)]
 }
 
-[sub_resource type="Animation" id="Animation_dqmen"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_x1pv6"]
+resource_name = "jump"
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -34,7 +66,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Rect2(0, 0, 16, 16)]
+"values": [Rect2(0, 32, 16, 16)]
 }
 
 [sub_resource type="Animation" id="Animation_wrc6h"]
@@ -54,38 +86,6 @@ tracks/0/keys = {
 "values": [Rect2(0, 16, 16, 16), Rect2(16, 16, 16, 16), Rect2(32, 16, 16, 16), Rect2(48, 16, 16, 16), Rect2(0, 16, 16, 16)]
 }
 
-[sub_resource type="Animation" id="Animation_x1pv6"]
-resource_name = "jump"
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerAnimator/Sprite2D:region_rect")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Rect2(0, 32, 16, 16)]
-}
-
-[sub_resource type="Animation" id="Animation_4xu03"]
-resource_name = "fall"
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerAnimator/Sprite2D:region_rect")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Rect2(0, 48, 16, 16)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wrc6h"]
 _data = {
 &"RESET": SubResource("Animation_dqmen"),
@@ -101,13 +101,16 @@ height = 14.0
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(0, -8)
+collision_mask = 768
 script = ExtResource("1_xtx3v")
-speed = 5.0
-jump_power = 8.0
+speed = 4.0
+jump_power = 8.5
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -15)
-zoom = Vector2(6, 6)
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
 
 [node name="PlayerAnimator" type="Node2D" parent="." node_paths=PackedStringArray("player_controller", "animation_player", "sprite")]
 script = ExtResource("2_dqmen")
