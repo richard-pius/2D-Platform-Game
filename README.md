@@ -63,3 +63,7 @@ This project would not have been possible without the amazing tutorials and free
     * **How to add a background image:** [Link to YouTube Tutorial](https://www.youtube.com/watch?v=p9NB_pO9u14)
     * **Exporting the game for Windows:** [Link to YouTube Tutorial](https://www.youtube.com/watch?v=X1XCTpo8mec)
     * **Useful Godot video:** [Link to YouTube Tutorial](https://www.youtube.com/watch?v=KWhVVMpihsc)
+ 
+## License
+
+This project is licensed under the MIT License. See the [LICENSE] (LICENSE) file for details.
