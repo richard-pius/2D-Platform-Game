@@ -1,7 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://dxgkm7pbece4y"]
+[gd_scene load_steps=21 format=3 uid="uid://dxgkm7pbece4y"]
 
 [ext_resource type="PackedScene" uid="uid://c1x86wxq2bp7n" path="res://Assets/Scences/player.tscn" id="2_kfxim"]
 [ext_resource type="PackedScene" uid="uid://c8pfmakqkx1tk" path="res://Assets/Scences/moving_platform_large.tscn" id="2_o7m1l"]
+[ext_resource type="Texture2D" uid="uid://dgvprwgrseok5" path="res://Assets/Background/1.png" id="3_b7eff"]
+[ext_resource type="Texture2D" uid="uid://cnq8cjob7tj1e" path="res://Assets/Background/2.png" id="4_c7ian"]
+[ext_resource type="Texture2D" uid="uid://b8nvwvlj30bl3" path="res://Assets/Background/3.png" id="5_58b1u"]
+[ext_resource type="Texture2D" uid="uid://d2jj6rg1xlrey" path="res://Assets/Background/4.png" id="6_sbw15"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fpyp4"]
 load_path = "res://.godot/imported/tiles_1.png-f28c74867da046efe8a6e18b7a426c13.ctex"
@@ -474,3 +478,32 @@ position = Vector2(2043, -39.999996)
 scale = Vector2(-1, 0.9328859)
 curve = SubResource("Curve2D_w3mcx")
 path_time = 1.5
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(576, 324)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("3_b7eff")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.6, 0.6)
+motion_mirroring = Vector2(576, 324)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture = ExtResource("4_c7ian")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_offset = Vector2(0.7, 0)
+motion_mirroring = Vector2(576, 324)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+texture = ExtResource("5_58b1u")
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(576, 324)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+texture = ExtResource("6_sbw15")
